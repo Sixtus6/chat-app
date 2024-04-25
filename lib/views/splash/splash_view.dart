@@ -4,13 +4,16 @@ import 'package:chatapp/config/color.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:stacked/stacked.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ViewModelBuilder.nonReactive(
+        viewModelBuilder: () => OrderSummaryPageViewModel(),
+        builder: ((context, viewModel, child) => Scaffold()));
   }
 }
 
