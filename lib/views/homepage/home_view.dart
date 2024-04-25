@@ -12,6 +12,7 @@ class HomeScreenView extends StatelessWidget {
         viewModelBuilder: () => HomeScreenViewModel(),
         builder: ((context, viewModel, child) => Scaffold(
               backgroundColor: ColorConfig.white,
+              appBar: AppBarWidget(),
               //body: Center(child: Lottie.asset("assets/lottie/splash.json")),
             )));
   }
