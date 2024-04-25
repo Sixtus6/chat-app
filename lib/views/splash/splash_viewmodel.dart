@@ -1,9 +1,13 @@
+import 'dart:async';
+import 'package:chatapp/views/homepage/home_view.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:stacked/stacked.dart';
 
-class OrderSummaryPageViewModel extends ReactiveViewModel
-    implements Initialisable {
-  @override
-  void initialise() {
-    // TODO: implement initialise
+class SplashScreenViewModel extends BaseViewModel {
+  switchScreen(context) {
+    Timer(const Duration(seconds: 3), () {
+      const HomeScreenView().launch(context,
+          pageRouteAnimation: PageRouteAnimation.Fade, isNewTask: true);
+    });
   }
 }
