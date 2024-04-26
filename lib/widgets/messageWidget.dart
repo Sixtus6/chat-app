@@ -37,12 +37,12 @@ class MessageWidget extends StatelessWidget {
           ),
           subtitle: RichText(
             text: TextSpan(
-              text: message ?? 'Message: ',
+              text: 'Message: ',
               style: TextStyle(color: Colors.black.withOpacity(0.7)),
-              children: const [
+              children: [
                 TextSpan(
-                  text: 'Hi, how you doing?',
-                  style: TextStyle(color: Colors.black54),
+                  text: message ?? 'Hi, how you doing?',
+                  style: const TextStyle(color: Colors.black54),
                 ),
               ],
             ),

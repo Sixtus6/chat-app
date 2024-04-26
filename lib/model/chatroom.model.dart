@@ -1,11 +1,11 @@
-class Welcome {
+class ChatRoom {
   int id;
   String lastMessage;
   List<String> members;
   String topic;
   int modifiedAt;
 
-  Welcome({
+  ChatRoom({
     required this.id,
     required this.lastMessage,
     required this.members,
@@ -13,12 +13,12 @@ class Welcome {
     required this.modifiedAt,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-        id: json["id"],
+  factory ChatRoom.fromJson(Map<String, dynamic> json) => ChatRoom(
+        id: json["id"].toInt(),
         lastMessage: json["last_message"],
         members: List<String>.from(json["members"].map((x) => x)),
-        topic: json["topic"],
-        modifiedAt: json["modified_at"],
+        topic: json["topic"] ?? "N/A",
+        modifiedAt: json["modified_at"].toInt(),
       );
 
   Map<String, dynamic> toJson() => {
