@@ -7,6 +7,7 @@ class MessageWidget extends StatelessWidget {
   const MessageWidget({
     super.key,
     this.title,
+    this.message,
   });
   final String? title;
   final String? message;

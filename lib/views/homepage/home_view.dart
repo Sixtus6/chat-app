@@ -16,13 +16,10 @@ class HomeScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: ColorConfig.primary, // Change the status bar color
-      statusBarIconBrightness:
-          Brightness.light, // Change the status bar icons' color
-      systemNavigationBarColor:
-          ColorConfig.white, // Change the navigation bar color
-      systemNavigationBarIconBrightness:
-          Brightness.light, // Change the navigation bar icons' color
+      statusBarColor: ColorConfig.primary,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: ColorConfig.white,
+      systemNavigationBarIconBrightness: Brightness.light,
     ));
     return ViewModelBuilder.nonReactive(
         viewModelBuilder: () => HomeScreenViewModel(),
