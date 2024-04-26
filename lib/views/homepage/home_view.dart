@@ -2,7 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:chatapp/config/color.dart';
 import 'package:chatapp/config/size.dart';
 import 'package:chatapp/services/api/api_client.dart';
-import 'package:chatapp/services/end_point.dart';
+import 'package:chatapp/services/api/end_point.dart';
 import 'package:chatapp/utils/style.dart';
 import 'package:chatapp/views/chat/chat_view.dart';
 import 'package:chatapp/views/homepage/home_viewmodel.dart';
