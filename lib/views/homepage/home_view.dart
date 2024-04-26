@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:stacked/stacked.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreenView extends StatelessWidget {
   const HomeScreenView({super.key});
@@ -30,6 +31,7 @@ class HomeScreenView extends StatelessWidget {
                 child: SingleChildScrollView(
                     child: Column(
                   children: [
+                    //Custom AppBar
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,6 +52,57 @@ class HomeScreenView extends StatelessWidget {
                           size: 30,
                         ).expand(),
                       ],
+                    ),
+                    20.height,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: ColorConfig.white,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(60),
+                            topRight: Radius.circular(60)),
+                      ),
+                      height: SizeConfigs.screenHeight,
+                      width: double.infinity,
+                      child: Column(
+                        children: [
+                          Card(
+                                  elevation: 4,
+                                  color: ColorConfig.white,
+                                  child: ListTile(
+                                    leading: Container(
+                                      width: 40, // Adjust the size as needed
+                                      height: 40, // Adjust the size as needed
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: ColorConfig.primary.withOpacity(
+                                            0.6), // Change the color as needed
+                                      ),
+                                      child: const Icon(
+                                        Icons.group,
+                                        size:
+                                            25, // Adjust the icon size as needed
+                                        color: Colors
+                                            .white, // Change the icon color as needed
+                                      ),
+                                    ),
+                                    title: Text(
+                                      'Group ${1}',
+                                      style: titleStyle(context, false,
+                                          size: 17, color: Colors.black87),
+                                    ), // Display the user's name or title
+                                    subtitle: Text(
+                                        'Message: Hi, how you doing?'), // Display the message content
+
+                                    trailing: Text(
+                                      DateFormat('HH:mm').format(DateTime
+                                          .now()), // Format the current time
+                                    ),
+                                  ))
+                              .paddingSymmetric(
+                                  horizontal: SizeConfigs.getPercentageWidth(6))
+                        ],
+                      ).paddingTop(40),
+                      // child: Card(),
                     )
                   ],
                 )),
