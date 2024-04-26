@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:chatapp/config/color.dart';
 import 'package:chatapp/config/size.dart';
+import 'package:chatapp/model/chatmesage.model.dart';
 import 'package:chatapp/model/chatroom.model.dart';
 import 'package:chatapp/services/api/api_client.dart';
 import 'package:chatapp/services/api/end_point.dart';
@@ -48,8 +49,17 @@ class HomeScreenView extends StatelessWidget {
                         ).expand(),
                         Text("Messages",
                                 style: titleStyle(context, true, size: 20))
-                            .onTap(() async {})
-                            .paddingSymmetric(
+                            .onTap(() async {
+                          // try {
+                          //   var data = await ApiClient()
+                          //       .fetchData(Endpoints.chatRoom3);
+                          //   var d = ChatMessage.fromJson(data["data"]);
+                          //   print(d);
+                          //   print(data["data"]);
+                          // } catch (e) {
+                          //   print(e);
+                          // }
+                        }).paddingSymmetric(
                                 horizontal: SizeConfigs.getPercentageWidth(6),
                                 vertical: SizeConfigs.getPercentageHeight(2)),
                         Icon(
@@ -60,66 +70,81 @@ class HomeScreenView extends StatelessWidget {
                       ],
                     ),
                     20.height,
+
                     Container(
-                      decoration: BoxDecoration(
-                        color: ColorConfig.white,
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(50),
-                            topRight: Radius.circular(50)),
-                      ),
-                      height: SizeConfigs.screenHeight,
-                      width: double.infinity,
-                      child: viewModel.isBusy
-                          ? SpinKitWave(
-                              size: 20,
-                              color: ColorConfig.primary,
-                            ).paddingBottom(SizeConfigs.getPercentageHeight(30))
-                          : Column(
-                              children: List.generate(
-                                  viewModel.chatRooms.length,
-                                  (index) => OpenContainer(
-                                        transitionDuration:
-                                            Duration(seconds: 3),
-                                        closedBuilder: (BuildContext context,
-                                                VoidCallback openContainer) =>
-                                            GestureDetector(
-                                          onTap: openContainer,
-                                          child: MessageWidget(
-                                            title: viewModel
-                                                .capitalizeFirstLetter(viewModel
-                                                            .chatRooms[index]
-                                                            .topic
-                                                            .toLowerCase() ==
-                                                        "n/a"
-                                                    ? "unknown"
-                                                    : viewModel.chatRooms[index]
-                                                        .topic),
-                                            message: viewModel
-                                                .capitalizeFirstLetter(viewModel
-                                                    .chatRooms[index]
-                                                    .lastMessage),
-                                          ),
-                                        ).paddingSymmetric(
-                                          horizontal:
-                                              SizeConfigs.getPercentageWidth(6),
-                                        ),
-                                        openBuilder: (BuildContext context,
-                                                _) =>
-                                            ChatScreenView(
-                                                group: viewModel
-                                                    .capitalizeFirstLetter(viewModel
+                        decoration: BoxDecoration(
+                          color: ColorConfig.white,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50)),
+                        ),
+                        height: SizeConfigs.screenHeight,
+                        width: double.infinity,
+                        child: viewModel.isBusy
+                            ? SpinKitWave(
+                                size: 20,
+                                color: ColorConfig.primary,
+                              ).paddingBottom(
+                                SizeConfigs.getPercentageHeight(30))
+                            : Column(
+                                children: [
+                                  Column(
+                                      children: List.generate(
+                                          viewModel.chatRooms.length,
+                                          (index) => OpenContainer(
+                                                transitionDuration:
+                                                    Duration(seconds: 3),
+                                                closedBuilder: (BuildContext
+                                                            context,
+                                                        VoidCallback
+                                                            openContainer) =>
+                                                    GestureDetector(
+                                                  onTap: openContainer,
+                                                  child: MessageWidget(
+                                                    title: viewModel
+                                                        .capitalizeFirstLetter(viewModel
+                                                                    .chatRooms[
+                                                                        index]
+                                                                    .topic
+                                                                    .toLowerCase() ==
+                                                                "n/a"
+                                                            ? "unknown"
+                                                            : viewModel
                                                                 .chatRooms[
                                                                     index]
-                                                                .topic
-                                                                .toLowerCase() ==
-                                                            "n/a"
-                                                        ? "unknown"
-                                                        : viewModel
-                                                            .chatRooms[index]
-                                                            .topic)),
-                                      ))).paddingTop(40),
-                      // child: Card(),
-                    )
+                                                                .topic),
+                                                    message: viewModel
+                                                        .capitalizeFirstLetter(
+                                                            viewModel
+                                                                .chatRooms[
+                                                                    index]
+                                                                .lastMessage),
+                                                  ),
+                                                ).paddingSymmetric(
+                                                  horizontal: SizeConfigs
+                                                      .getPercentageWidth(6),
+                                                ),
+                                                openBuilder: (BuildContext
+                                                            context,
+                                                        _) =>
+                                                    ChatScreenView(
+                                                        group: viewModel
+                                                            .capitalizeFirstLetter(viewModel
+                                                                        .chatRooms[
+                                                                            index]
+                                                                        .topic
+                                                                        .toLowerCase() ==
+                                                                    "n/a"
+                                                                ? "unknown"
+                                                                : viewModel
+                                                                    .chatRooms[
+                                                                        index]
+                                                                    .topic)),
+                                              ))).paddingTop(40),
+                                ],
+                              )
+                        // child: Card(),
+                        )
                   ],
                 )),
               ),

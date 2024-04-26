@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:chatapp/config/color.dart';
 import 'package:chatapp/config/size.dart';
+import 'package:chatapp/model/chatmesage.model.dart';
+import 'package:chatapp/services/api/api_client.dart';
+import 'package:chatapp/services/api/end_point.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -11,20 +14,6 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 class ChatScreenViewModel extends BaseViewModel {
   final user = const types.User(
       id: "82091008-a484-4a89-ae75-a22bf8d6f3ac", firstName: "Sixtus");
-
-  final micahel = const types.User(
-    id: 'micahel',
-    firstName: 'Recipient',
-    imageUrl: 'https://example.com/recipient_image.jpg',
-  );
-
-  // Dummy user for the current user
-  final francis = const types.User(
-    id: 'francis',
-    firstName: 'Current User',
-    imageUrl:
-        'https://example.com/current_user_image.jpg', // URL to current user's image
-  );
 
   String randomStringID() {
     final random = Random.secure();
@@ -35,8 +24,9 @@ class ChatScreenViewModel extends BaseViewModel {
 
   List<types.Message> messages = [];
 
-  void addMessage(types.Message message) {
+  addMessage(types.Message message) {
     messages.insert(0, message);
+    print(":added");
     notifyListeners();
   }
 
@@ -56,7 +46,8 @@ class ChatScreenViewModel extends BaseViewModel {
     );
     print(textMessage);
     addMessage(textMessage);
-    notifyListeners();
+    initialize();
+    //initialize();
   }
 
   void updateMessage(types.TextMessage message) {
@@ -64,21 +55,37 @@ class ChatScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void initialize() {
-    messages = <types.Message>[
-      types.TextMessage(
-        author: micahel,
-        id: 'message_id_1',
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        text: 'Hello, how are you?',
-      ),
-      types.TextMessage(
-        author: francis,
-        id: 'message_id_2',
-        createdAt: DateTime.now().millisecondsSinceEpoch + 1000,
-        text: 'Hi there!',
-      ),
+  getRandomEndpoint(List<String> endpoints) {
+    endpoints.shuffle();
+    return endpoints.first;
+  }
+
+  Future<void> initialize() async {
+    List<String> allChatRoom = [
+      Endpoints.chatRoom1,
+      Endpoints.chatRoom2,
+      Endpoints.chatRoom3
     ];
+    try {
+      var data = await ApiClient()
+          .fetchData(getRandomEndpoint(allChatRoom).toString());
+      var response = ChatMessage.fromJson(data["data"]);
+      print(getRandomEndpoint(allChatRoom).toString());
+      final userInstance = types.User(
+        id: randomStringID(),
+        firstName: capitalizeFirstLetter(response.sender),
+      );
+      types.Message chat = types.TextMessage(
+        author: userInstance,
+        id: randomStringID(),
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        text: response.message,
+      );
+
+      addMessage(chat);
+    } catch (e) {
+      print(e);
+    }
   }
 
   Widget customTextMessageBuilders(types.TextMessage message,

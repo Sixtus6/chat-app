@@ -1,11 +1,11 @@
-class Welcome {
+class ChatMessage {
   int id;
   int chatId;
   String sender;
   String message;
   int modifiedAt;
 
-  Welcome({
+  ChatMessage({
     required this.id,
     required this.chatId,
     required this.sender,
@@ -13,7 +13,7 @@ class Welcome {
     required this.modifiedAt,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
         id: json["id"],
         chatId: json["chat_id"],
         sender: json["sender"],
