@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:chatapp/config/color.dart';
 import 'package:chatapp/config/size.dart';
 import 'package:chatapp/utils/style.dart';
@@ -63,8 +64,10 @@ class HomeScreenView extends StatelessWidget {
                       width: double.infinity,
                       child: Column(
                         children: [
-                          MessageWidget().paddingSymmetric(
-                              horizontal: SizeConfigs.getPercentageWidth(6))
+                          OpenContainer(
+                            child: MessageWidget().paddingSymmetric(
+                                horizontal: SizeConfigs.getPercentageWidth(6)),
+                          )
                         ],
                       ).paddingTop(40),
                       // child: Card(),
