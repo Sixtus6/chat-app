@@ -1,6 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:chatapp/config/color.dart';
 import 'package:chatapp/config/size.dart';
+import 'package:chatapp/services/api/api_client.dart';
+import 'package:chatapp/services/end_point.dart';
 import 'package:chatapp/utils/style.dart';
 import 'package:chatapp/views/chat/chat_view.dart';
 import 'package:chatapp/views/homepage/home_viewmodel.dart';
@@ -43,7 +45,11 @@ class HomeScreenView extends StatelessWidget {
                         ).expand(),
                         Text("Messages",
                                 style: titleStyle(context, true, size: 20))
-                            .paddingSymmetric(
+                            .onTap(() async {
+                          var data =
+                              await ApiClient().fetchData(Endpoints.chatRoom);
+                          print(data);
+                        }).paddingSymmetric(
                                 horizontal: SizeConfigs.getPercentageWidth(6),
                                 vertical: SizeConfigs.getPercentageHeight(2)),
                         Icon(
