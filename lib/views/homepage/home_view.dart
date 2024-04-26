@@ -58,8 +58,8 @@ class HomeScreenView extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: ColorConfig.white,
                         borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(60),
-                            topRight: Radius.circular(60)),
+                            topLeft: Radius.circular(50),
+                            topRight: Radius.circular(50)),
                       ),
                       height: SizeConfigs.screenHeight,
                       width: double.infinity,
