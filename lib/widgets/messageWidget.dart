@@ -6,7 +6,10 @@ import 'package:intl/intl.dart';
 class MessageWidget extends StatelessWidget {
   const MessageWidget({
     super.key,
+    this.title,
   });
+  final String? title;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -15,45 +18,36 @@ class MessageWidget extends StatelessWidget {
         color: ColorConfig.white,
         child: ListTile(
           leading: Container(
-            width: 40, // Adjust the size as needed
-            height: 40, // Adjust the size as needed
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorConfig.primary
-                  .withOpacity(0.6), // Change the color as needed
+              color: ColorConfig.primary.withOpacity(0.6),
             ),
             child: const Icon(
               Icons.group,
-              size: 25, // Adjust the icon size as needed
-              color: Colors.white, // Change the icon color as needed
+              size: 25,
+              color: Colors.white,
             ),
           ),
           title: Text(
-            'Group ${1}',
+            title ?? 'Group ${1}',
             style: titleStyle(context, false, size: 17, color: Colors.black87),
           ),
           subtitle: RichText(
             text: TextSpan(
-              text: 'Message: ',
-              style: TextStyle(
-                  color: Colors.black
-                      .withOpacity(0.7)), // Style for the whole text
+              text: message ?? 'Message: ',
+              style: TextStyle(color: Colors.black.withOpacity(0.7)),
               children: const [
                 TextSpan(
-                  text: 'Hi, how you doing?', // Current time
-                  style: TextStyle(
-                      color: Colors.black54), // Style for the time part
+                  text: 'Hi, how you doing?',
+                  style: TextStyle(color: Colors.black54),
                 ),
               ],
             ),
           ),
-          // Display the user's name or title
-          // subtitle: Text(
-          //     'Message: Hi, how you doing?'), // Display the message content
-
           trailing: Text(
-            DateFormat('HH:mm')
-                .format(DateTime.now()), // Format the current time
+            DateFormat('HH:mm').format(DateTime.now()),
           ),
         ));
   }
