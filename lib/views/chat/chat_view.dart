@@ -12,39 +12,36 @@ class ChatScreenView extends StatelessWidget {
   final String group;
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
         viewModelBuilder: () => ChatScreenViewModel(),
+        onViewModelReady: (viewModel) => viewModel.initialize(),
         builder: ((context, viewModel, child) => Scaffold(
               appBar: AppBarWidget(title: group),
               backgroundColor: ColorConfig.white,
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Chat(
-                      theme: DefaultChatTheme(
-                        backgroundColor: Colors.transparent,
-                        primaryColor: ColorConfig.primary,
-                        secondaryColor: Color(0xff4d4d4d).withOpacity(0.7),
-                        // secondaryColor: Colors.white30,
-                        inputBackgroundColor: Colors.grey.shade900,
-                      ),
-                      showUserNames: true,
-                      // messages: provider.messages,
-                      //  customMessageBuilder: provider.customTextMessageBuilder,
-                      textMessageOptions:
-                          TextMessageOptions(isTextSelectable: true),
-                      messages: [],
-                      onSendPressed: (PartialText) {},
-                      user: User(id: "widget.userid", firstName: "Sixtus"),
-                      // onSendPressed: provider.handleSendPressed,
+              body: Column(
+                children: [
+                  Chat(
+                    theme: DefaultChatTheme(
+                      backgroundColor: Colors.transparent,
+                      primaryColor: ColorConfig.primary,
+                      secondaryColor: ColorConfig.primary.withOpacity(0.6),
+                      // secondaryColor: Colors.white30,
+                      inputBackgroundColor: Colors.grey.shade900,
+                    ),
+                    showUserNames: true,
+                    // messages: provider.messages,
+                    // customMessageBuilder: v.customTextMessageBuilder,
+                    textMessageOptions:
+                        TextMessageOptions(isTextSelectable: true),
+                    messages: viewModel.messages,
 
-                      // onSendPressed: provider.handleSendPressed,
-                      // user:
-                      //     User(id: widget.userid!, firstName: widget.firstname),
-                      // textMessageBuilder: provider.customTextMessageBuilders,
-                    ).withSize(width: double.infinity).expand()
-                  ],
-                ),
+                    user: viewModel.user,
+                    onSendPressed: viewModel.handleSendPressed,
+                    // user:
+                    //     User(id: widget.userid!, firstName: widget.firstname),
+                    textMessageBuilder: viewModel.customTextMessageBuilders,
+                  ).withSize(width: double.infinity).expand()
+                ],
               ),
             )));
   }
