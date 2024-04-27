@@ -49,17 +49,8 @@ class HomeScreenView extends StatelessWidget {
                         ).expand(),
                         Text("Messages",
                                 style: titleStyle(context, true, size: 20))
-                            .onTap(() async {
-                          // try {
-                          //   var data = await ApiClient()
-                          //       .fetchData(Endpoints.chatRoom3);
-                          //   var d = ChatMessage.fromJson(data["data"]);
-                          //   print(d);
-                          //   print(data["data"]);
-                          // } catch (e) {
-                          //   print(e);
-                          // }
-                        }).paddingSymmetric(
+                            .onTap(() async {})
+                            .paddingSymmetric(
                                 horizontal: SizeConfigs.getPercentageWidth(6),
                                 vertical: SizeConfigs.getPercentageHeight(2)),
                         Icon(
@@ -70,7 +61,6 @@ class HomeScreenView extends StatelessWidget {
                       ],
                     ),
                     20.height,
-
                     Container(
                         decoration: BoxDecoration(
                           color: ColorConfig.white,
@@ -93,7 +83,7 @@ class HomeScreenView extends StatelessWidget {
                                           viewModel.chatRooms.length,
                                           (index) => OpenContainer(
                                                 transitionDuration:
-                                                    Duration(seconds: 3),
+                                                    const Duration(seconds: 3),
                                                 closedBuilder: (BuildContext
                                                             context,
                                                         VoidCallback
@@ -119,6 +109,11 @@ class HomeScreenView extends StatelessWidget {
                                                                 .chatRooms[
                                                                     index]
                                                                 .lastMessage),
+                                                    counter: viewModel
+                                                        .chatRooms[index]
+                                                        .members
+                                                        .length
+                                                        .toString(),
                                                   ),
                                                 ).paddingSymmetric(
                                                   horizontal: SizeConfigs

@@ -25,20 +25,14 @@ class ChatScreenView extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       primaryColor: ColorConfig.primary,
                       secondaryColor: ColorConfig.primary.withOpacity(0.6),
-                      // secondaryColor: Colors.white30,
                       inputBackgroundColor: Colors.grey.shade900,
                     ),
                     showUserNames: true,
-                    // messages: provider.messages,
-                    // customMessageBuilder: v.customTextMessageBuilder,
                     textMessageOptions:
                         TextMessageOptions(isTextSelectable: true),
                     messages: viewModel.messages,
-
                     user: viewModel.user,
                     onSendPressed: viewModel.handleSendPressed,
-                    // user:
-                    //     User(id: widget.userid!, firstName: widget.firstname),
                     textMessageBuilder: viewModel.customTextMessageBuilders,
                   ).withSize(width: double.infinity).expand()
                 ],

@@ -25,6 +25,7 @@ class ChatScreenViewModel extends BaseViewModel {
   List<types.Message> messages = [];
 
   addMessage(types.Message message) {
+    print(messages);
     messages.insert(0, message);
     print(":added");
     notifyListeners();
@@ -96,8 +97,6 @@ class ChatScreenViewModel extends BaseViewModel {
         : 'Sender'; // Use a default name for sender messages
     final messageTime = DateTime.fromMillisecondsSinceEpoch(message.createdAt!);
     final time = DateFormat.Hm().format(messageTime);
-
-    // Customize the appearance of the text message
     return Container(
       margin: EdgeInsets.symmetric(vertical: SizeConfigs.getPercentageWidth(2)),
       decoration: BoxDecoration(
@@ -111,7 +110,7 @@ class ChatScreenViewModel extends BaseViewModel {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (showName) // Check if showName is true
+            if (showName)
               Text(
                 isRecipientMessage
                     ? capitalizeFirstLetter(message.author.firstName!)
